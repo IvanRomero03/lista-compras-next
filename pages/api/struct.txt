@@ -1,0 +1,18 @@
+import { prisma } from "./_db";
+import { NextApiRequest, NextApiResponse } from "next";
+
+const name = async (req: NextApiRequest, res: NextApiResponse) => {
+  const body = req.body;
+
+  const queryResponse = await prisma.user ...  ({
+    where: {
+        ...
+    },
+    });
+    if ( ... ) {
+        res.send( ... );
+    } else {
+        res.send( ... );
+    }
+};
+export default name;
