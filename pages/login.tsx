@@ -38,7 +38,7 @@ const Login = () => {
       if (userResponse) {
         setCookie("user", userResponse.idUser);
         setCookie("name", userResponse.name);
-        //router.push("/");
+        router.push("/");
       } else {
         alert("Invalid input");
       }
