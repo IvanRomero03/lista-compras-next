@@ -5,7 +5,7 @@ const createElement = async (
   description: string,
   userId: number
 ) => {
-  if (!name || !description || !userId) {
+  if (!name || !userId) {
     return;
   }
 

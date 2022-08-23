@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const createElement = async (req: NextApiRequest, res: NextApiResponse) => {
   const { name, description, userId } = req.body;
-  if (!name || !description || !userId) {
+  if (!name || !userId) {
     res.status(400).send(undefined);
     return;
   }
