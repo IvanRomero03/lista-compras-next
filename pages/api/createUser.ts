@@ -11,6 +11,7 @@ const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
       password: password as string,
     },
   });
+  console.log(user);
   res.status(200).send(user);
 };
 export default createUser;

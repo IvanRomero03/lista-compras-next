@@ -35,6 +35,7 @@ const Login = () => {
       alert("name already exists");
     } else {
       const userResponse = await createUser(user, password);
+      console.log(userResponse);
       if (userResponse) {
         setCookie("user", userResponse.idUser);
         setCookie("name", userResponse.name);

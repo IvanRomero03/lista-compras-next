@@ -144,8 +144,6 @@ const Home = () => {
                 <Element
                   key={element.idElement}
                   idElement={element.idElement}
-                  name={element.name}
-                  description={element.description}
                 />
               ))}
             </>

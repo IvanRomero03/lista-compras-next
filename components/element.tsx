@@ -3,11 +3,24 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import deleteElement from "../apiCalls/deleteElement";
 import editElement from "../apiCalls/editElement";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import getElement from "../apiCalls/getElement";
+import { element } from "../types/list";
 
-const Element = ({ idElement, name, description }) => {
+type response = {
+  data: element;
+  isLoading: boolean;
+  isError: boolean;
+};
+
+const Element = ({ idElement }) => {
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
+
+  const { data, isLoading, isError }: response = useQuery(
+    ["element" + idElement],
+    async () => await getElement(idElement)
+  );
 
   const deleteMutation = useMutation(
     ["list"],
@@ -33,6 +46,7 @@ const Element = ({ idElement, name, description }) => {
     {
       onSuccess: async () => {
         queryClient.invalidateQueries(["list"]);
+        queryClient.invalidateQueries(["element" + idElement]);
       },
     }
   );
@@ -46,13 +60,13 @@ const Element = ({ idElement, name, description }) => {
     <>
       {!isEditing ? (
         <HStack spacing={4}>
-          <Code>{name}</Code>
+          <Code>{data?.name ?? "Loading..."}</Code>
           <Text
             style={{
               fontWeight: "bold",
             }}
           >
-            {description}
+            {data?.description ?? "Loading..."}
           </Text>
           <Button
             variant="outline"
@@ -77,8 +91,8 @@ const Element = ({ idElement, name, description }) => {
         <HStack spacing={4}>
           <Formik
             initialValues={{
-              name: name,
-              description: description,
+              name: data.name,
+              description: data.description,
             }}
             onSubmit={(values) => {
               handleEditElement(values);
