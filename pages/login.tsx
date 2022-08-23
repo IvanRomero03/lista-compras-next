@@ -10,9 +10,9 @@ import {
 import { Formik, Form, Field } from "formik";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";
-import authUser from "../apiCalls/authUser";
-import createUser from "../apiCalls/createUser";
-import getValidUser from "../apiCalls/getValidUser";
+import authUser from "...";
+import createUser from "...";
+import getValidUser from "...";
 
 const Login = () => {
   const router = useRouter();
@@ -35,6 +35,7 @@ const Login = () => {
       alert("name already exists");
     } else {
       const userResponse = await createUser(user, password);
+      console.log(userResponse);
       if (userResponse) {
         setCookie("user", userResponse.idUser);
         setCookie("name", userResponse.name);

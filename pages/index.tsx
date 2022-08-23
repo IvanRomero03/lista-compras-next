@@ -18,12 +18,12 @@ import { deleteCookie, getCookie, hasCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import getUserList from "../apiCalls/getUserList";
 import { list } from "../types/list";
-import createElement from "../apiCalls/createElement";
-import deleteElement from "../apiCalls/deleteElement";
 import Element from "../components/element";
 import { Formik, Form, Field } from "formik";
+import getUserList from "...";
+import createElement from "...";
+import deleteElement from "...";
 
 const Home = () => {
   const router = useRouter();
@@ -144,8 +144,6 @@ const Home = () => {
                 <Element
                   key={element.idElement}
                   idElement={element.idElement}
-                  name={element.name}
-                  description={element.description}
                 />
               ))}
             </>
